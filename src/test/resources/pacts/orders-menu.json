@@ -1,0 +1,90 @@
+{
+  "provider": {
+    "name": "menu"
+  },
+  "consumer": {
+    "name": "orders"
+  },
+  "interactions": [
+    {
+      "description": "A request to /menu/1",
+      "request": {
+        "method": "GET",
+        "path": "/menu/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "name": "name",
+          "id": 1,
+          "desc": "desc"
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset\u003d[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "retrieve menu item by id1"
+        }
+      ]
+    },
+    {
+      "description": "A request to /menu/2",
+      "request": {
+        "method": "GET",
+        "path": "/menu/2"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "name": "name",
+          "id": 2,
+          "desc": "desc"
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset\u003d[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "retrieve menu item by id2"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.12"
+    }
+  }
+}
