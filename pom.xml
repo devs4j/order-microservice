@@ -22,6 +22,16 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-consumer-junit_2.12</artifactId>
+			<version>3.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-consumer-java8_2.12</artifactId>
+			<version>3.6.12</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
