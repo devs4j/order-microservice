@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import mx.com.devs4j.microservices.order.exceptions.OrderNotFoundException;
 import mx.com.devs4j.microservices.order.item.MenuItem;
-import mx.com.devs4j.microservices.order.item.MenuItemGateway;
+import mx.com.devs4j.microservices.order.item.MenuItemFeignGateway;
 
 @Service
 public class OrderService {
 	
 	private final OrderRepository repository;
-	private MenuItemGateway menuItemGateway;
+	private MenuItemFeignGateway menuItemGateway;
 
-	public OrderService(OrderRepository repository, MenuItemGateway menuItemGateway) {
+	public OrderService(OrderRepository repository, MenuItemFeignGateway menuItemGateway) {
 		this.repository = repository;
 		this.menuItemGateway = menuItemGateway;
 	}

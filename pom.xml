@@ -38,6 +38,10 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>au.com.dius</groupId>
 			<artifactId>pact-jvm-consumer-junit_2.12</artifactId>
 			<version>3.6.12</version>
