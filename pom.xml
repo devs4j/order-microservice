@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>mx.com.devs4j.microservices</groupId>
-	<artifactId>simplemicroservice</artifactId>
+	<artifactId>order-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simplemicroservice</name>
 	<description>Demo project for Spring Boot</description>
