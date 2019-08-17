@@ -1,6 +1,6 @@
 package mx.com.devs4j.microservices.order.config;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ class LoadDatabase {
 	@Bean
 	CommandLineRunner initDatabase(OrderRepository repository, MenuItemRepository menuRepository) {
 		return args -> {
-			Set<MenuItem> items = new HashSet<>();
+			Set<MenuItem> items = new LinkedHashSet<>();
 			items.add(new MenuItem(1));
 			items.add(new MenuItem(2));
 			Order order = new Order(items);

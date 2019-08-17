@@ -20,13 +20,24 @@ public class MenuItemGateway {
 		this.baseUrl = baseUrl;
 	}
 
-	@HystrixCommand(commandProperties = {
-			@HystrixProperty( name="execution.isolation.thread.timeoutInMilliseconds", value="5000") })
+	@HystrixCommand(threadPoolKey = "itemThreadPool", threadPoolProperties = {
+			@HystrixProperty(name = "coreSize", value = "30"),
+			@HystrixProperty(name = "maxQueueSize", value = "10") }, 
+			fallbackMethod = "fallback", commandProperties = {
+					@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", 
+							value = "1000") })
 	public MenuItem getMenuItem(Integer id) {
-		dormirConProbabilidad1de3();
+//		dormirConProbabilidad1de3();
 		return restTemplate.getForObject(baseUrl + "/" + id, MenuItem.class);
 	}
-	
+
+	public MenuItem fallback(Integer id) {
+		MenuItem menuItem = new MenuItem();
+		menuItem.setName("N/A");
+		menuItem.setDescription("N/A");
+		return menuItem;
+	}
+
 	private void dormirConProbabilidad1de3() {
 		Random rand = new Random();
 		int randomNum = rand.nextInt((3 - 1) + 1) + 1;

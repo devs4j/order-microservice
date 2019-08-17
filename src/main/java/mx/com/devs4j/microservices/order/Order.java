@@ -1,5 +1,6 @@
 package mx.com.devs4j.microservices.order;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ public class Order {
 	
 	@JoinColumn(name = "id_order")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<MenuItem> items;
+	private Set<MenuItem> items = new LinkedHashSet<>();
 	
 	public Order(Set<MenuItem> items) {
 		super();
