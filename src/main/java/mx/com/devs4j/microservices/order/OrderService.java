@@ -56,7 +56,7 @@ public class OrderService {
 	
 	public void fillMenuItemDetails(Set<MenuItem> menuItems) {
 		menuItems.forEach((menuItem) -> {
-			MenuItem remoteMenuItem = menuItemGateway.getMenuItem(menuItem.getId());
+			MenuItem remoteMenuItem = menuItemGateway.getMenuItem(menuItem.getMenuItemId());
 			menuItem.setDescription(remoteMenuItem.getDescription());
 			menuItem.setName(remoteMenuItem.getName());
 		});

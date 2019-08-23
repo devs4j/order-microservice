@@ -1,6 +1,8 @@
 package mx.com.devs4j.microservices.order.item;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -9,15 +11,24 @@ import javax.persistence.Transient;
 @Entity
 public class MenuItem {
 
-	private @Id Integer id;
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
+	private Integer menuItemId;
 
 	@Transient
 	private String name;
 	@Transient
 	private String description;
 
-	public MenuItem(Integer id) {
-		this.id = id;
+	public MenuItem(Integer menuItemId) {
+		this.menuItemId = menuItemId;
+	}
+
+	public Integer getMenuItemId() {
+		return menuItemId;
+	}
+
+	public void setMenuItemId(Integer menuItemId) {
+		this.menuItemId = menuItemId;
 	}
 
 	public MenuItem() {
