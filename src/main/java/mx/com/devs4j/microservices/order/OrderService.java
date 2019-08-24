@@ -3,6 +3,8 @@ package mx.com.devs4j.microservices.order;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,8 @@ public class OrderService {
 	private final OrderRepository repository;
 	private MenuItemGateway menuItemGateway;
 	private CustomChannels customChannels;
+	
+	private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
 	public OrderService(OrderRepository repository, MenuItemGateway menuItemGateway,
 			CustomChannels customChannels) {
@@ -28,8 +32,10 @@ public class OrderService {
 	
 	public Order newOrder(@RequestBody Order newOrder) {
 		Order savedOrder = repository.save(newOrder);
+		logger.info("ORDER CREATED");
 		customChannels.orderCreated().send(
 				MessageBuilder.withPayload(newOrder).build());
+		logger.info("ORDER_CREATED_EVENT_PUBLISHED");
 		return savedOrder;
 	}
 
