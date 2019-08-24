@@ -2,6 +2,7 @@ package mx.com.devs4j.microservices.order;
 
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class OrderController {
 
 	@GetMapping("/orders")
 	public List<Order> all() {
+		LoggerFactory.getLogger(this.getClass()).info("Get all orders request received");
 		return service.findAll();
 	}
 

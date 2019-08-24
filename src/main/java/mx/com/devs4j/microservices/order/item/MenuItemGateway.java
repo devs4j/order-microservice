@@ -1,5 +1,6 @@
 package mx.com.devs4j.microservices.order.item;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +29,7 @@ public class MenuItemGateway {
 							value = "1000") })
 	public MenuItem getMenuItem(Integer id) {
 //		dormirConProbabilidad1de3();
+		LoggerFactory.getLogger(this.getClass()).info("Inside Hystrix");
 		return restTemplate.getForObject(baseUrl + "/" + id, MenuItem.class);
 	}
 
