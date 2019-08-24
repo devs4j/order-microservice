@@ -41,6 +41,7 @@ public class OrderService {
 	}
 
 	public List<Order> findAll() {
+		logger.info("ORDERS RETRIEVED");
 		List<Order> orders = repository.findAll();
 		orders.forEach((order) -> {
 			fillMenuItemDetails(order.getItems());
@@ -69,6 +70,7 @@ public class OrderService {
 	}
 	
 	public void fillMenuItemDetails(Set<MenuItem> menuItems) {
+		logger.info("FILLING MENU ITEMS");
 		menuItems.forEach((menuItem) -> {
 			MenuItem remoteMenuItem = menuItemGateway.getMenuItem(menuItem.getMenuItemId());
 			menuItem.setDescription(remoteMenuItem.getDescription());
