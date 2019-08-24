@@ -30,17 +30,17 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders/{id}")
-	public Order one(@PathVariable Long id) {
+	public Order one(@PathVariable Integer id) {
 		return service.findOne(id);
 	}
 
 	@PutMapping("/orders/{id}")
-	public Order replaceOrder(@RequestBody Order newOrder, @PathVariable Long id) {
+	public Order replaceOrder(@RequestBody Order newOrder, @PathVariable Integer id) {
 		return service.replaceOrder(newOrder, id);
 	}
 
 	@DeleteMapping("/orders/{id}")
-	public void deleteOrder(@PathVariable Long id) {
+	public void deleteOrder(@PathVariable Integer id) {
 		service.deleteOrder(id);
 	}
 	

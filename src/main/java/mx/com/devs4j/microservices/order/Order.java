@@ -18,7 +18,7 @@ import mx.com.devs4j.microservices.order.item.MenuItem;
 @Entity
 public class Order {
 
-	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Integer id;
 	
 	@JoinColumn(name = "id_order")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -33,11 +33,11 @@ public class Order {
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -4,7 +4,7 @@ public class OrderNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 7111845800579755015L;
 
-	public OrderNotFoundException(Long id) {
+	public OrderNotFoundException(Integer id) {
 		super("Could not find order " + id);
 	}
 	

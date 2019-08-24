@@ -33,8 +33,9 @@ public class OrderService {
 	public Order newOrder(@RequestBody Order newOrder) {
 		Order savedOrder = repository.save(newOrder);
 		logger.info("ORDER CREATED");
+		OrderEvent orderCreatedEvent = OrderEvent.from(newOrder);
 		customChannels.orderCreated().send(
-				MessageBuilder.withPayload(newOrder).build());
+				MessageBuilder.withPayload(orderCreatedEvent).build());
 		logger.info("ORDER_CREATED_EVENT_PUBLISHED");
 		return savedOrder;
 	}
@@ -47,13 +48,13 @@ public class OrderService {
 		return orders;
 	}
 
-	public Order findOne(@PathVariable Long id) {
+	public Order findOne(@PathVariable Integer id) {
 		Order order = repository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 		fillMenuItemDetails(order.getItems());
 		return order;
 	}
 
-	public Order replaceOrder(@RequestBody Order newOrder, @PathVariable Long id) {
+	public Order replaceOrder(@RequestBody Order newOrder, @PathVariable Integer id) {
 		return repository.findById(id).map(order -> {
 			order.setItems(newOrder.getItems());
 			return repository.save(order);
@@ -63,7 +64,7 @@ public class OrderService {
 		});
 	}
 
-	public void deleteOrder(@PathVariable Long id) {
+	public void deleteOrder(@PathVariable Integer id) {
 		repository.deleteById(id);
 	}
 	
@@ -74,5 +75,5 @@ public class OrderService {
 			menuItem.setName(remoteMenuItem.getName());
 		});
 	}
-
+	
 }
