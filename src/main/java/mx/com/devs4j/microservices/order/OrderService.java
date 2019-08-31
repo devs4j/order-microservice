@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import brave.ScopedSpan;
+import brave.Tracer;
 import mx.com.devs4j.microservices.order.exceptions.OrderNotFoundException;
 import mx.com.devs4j.microservices.order.item.MenuItem;
 import mx.com.devs4j.microservices.order.item.MenuItemGateway;
@@ -20,18 +22,22 @@ public class OrderService {
 	private final OrderRepository repository;
 	private MenuItemGateway menuItemGateway;
 	private CustomChannels customChannels;
+	private Tracer tracer;
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
 	public OrderService(OrderRepository repository, MenuItemGateway menuItemGateway,
-			CustomChannels customChannels) {
+			CustomChannels customChannels, Tracer tracer) {
 		this.repository = repository;
 		this.menuItemGateway = menuItemGateway;
 		this.customChannels = customChannels;
+		this.tracer = tracer;
 	}
 	
 	public Order newOrder(@RequestBody Order newOrder) {
+		ScopedSpan bdSpan = tracer.startScopedSpan("bdSpan");
 		Order savedOrder = repository.save(newOrder);
+		bdSpan.finish();
 		logger.info("ORDER CREATED");
 		OrderEvent orderCreatedEvent = OrderEvent.from(newOrder);
 		customChannels.orderCreated().send(
